@@ -4,9 +4,9 @@ from os.path import join
 import sh, os
 
 class FlaskRecipe(PythonRecipe):
-    version = "master"
+    version = "1.1.1"
     url = "https://github.com/mitsuhiko/flask/archive/{version}.zip"
-    depends = ["python","jinja2","werkzeug","itsdangerous","click"]
+    depends = ["python3", "host_setuptools3", "jinja2","werkzeug","itsdangerous","click"]
     
     def install(self):
         arch = list(self.filtered_archs)[0]
@@ -14,8 +14,8 @@ class FlaskRecipe(PythonRecipe):
         os.chdir(build_dir)
         hostpython = sh.Command(self.ctx.hostpython)
         build_env = arch.get_env()
-        dest_dir = join(self.ctx.dist_dir, "root", "python")
-        build_env['PYTHONPATH'] = join(dest_dir, 'lib', 'python2.7', 'site-packages')
+        dest_dir = join(self.ctx.dist_dir, "root", "python3")
+        build_env['PYTHONPATH'] = join(dest_dir, 'lib', 'python3.7', 'site-packages')
         cmd = sh.Command("sed")
         shprint(cmd, "-i", "", "s/setuptools/distutils.core/g", "./setup.py", _env=build_env)
         shprint(hostpython, "setup.py", "install", "--prefix", dest_dir, _env=build_env)

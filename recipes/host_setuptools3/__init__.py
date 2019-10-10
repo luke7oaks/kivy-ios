@@ -24,7 +24,6 @@ class HostSetuptools3(Recipe):
         os.chdir(site_packages_path)
         with open('setuptools.pth', 'r') as f:
             setuptools_egg_path = f.read().strip('./').strip('\n')
-            print("setuptools_egg_path=", setuptools_egg_path)
             unzip = sh.Command('unzip')
             shprint(unzip, "-o", setuptools_egg_path)
         os.remove(setuptools_egg_path)
