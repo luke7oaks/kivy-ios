@@ -1,3 +1,4 @@
 pbxproj==2.5.1
 Pillow>=6.1.0
 requests>=2.13
+urllib3>=2.2.2 # not directly required, pinned by Snyk to avoid a vulnerability
